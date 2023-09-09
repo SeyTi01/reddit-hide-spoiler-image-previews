@@ -19,6 +19,7 @@
     let div = document.createElement('div');
     let icon = document.createElement('i');
     icon.className = ICON_CLASS;
+    div.appendChild(icon);
 
     function replaceImages() {
         let images = document.querySelectorAll(IMAGE_SELECTOR);
@@ -30,10 +31,7 @@
             let spoilerSpan = image.closest('div[data-click-id="background"]').querySelector(SPOILER_SELECTOR);
             if (!spoilerSpan) continue;
 
-            div.className = image.className;
-            div.style = image.style;
-            div.appendChild(icon);
-            image.parentNode.replaceChild(div, image);
+            image.parentNode.replaceChild(div.cloneNode(true), image);
         }
     }
 
