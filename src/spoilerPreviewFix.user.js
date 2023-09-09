@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         New Reddit: Spoiler Preview Fix
 // @namespace    https://github.com/SeyTi01/
-// @version      1.0
+// @version      1.1
 // @description  Hides non-blurred spoiler image previews on New Reddit with gallery icons.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
