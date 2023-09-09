@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         New Reddit: Spoiler Preview Fix
 // @namespace    https://github.com/SeyTi01/
-// @version      1.1
+// @version      1.2
 // @description  Hides non-blurred spoiler image previews on New Reddit with gallery icons.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
@@ -25,13 +25,13 @@
         let images = document.querySelectorAll(IMAGE_SELECTOR);
 
         for (let image of images) {
-            let iconDiv = image.querySelector('div > i.icon');
-            if (iconDiv) continue;
+            let img = image.querySelector('img._25ZOvQhQdAqwdxPd5z-KFB');
+            if (!img) continue;
 
             let spoilerSpan = image.closest('div[data-click-id="background"]').querySelector(SPOILER_SELECTOR);
             if (!spoilerSpan) continue;
 
-            image.parentNode.replaceChild(div.cloneNode(true), image);
+            image.replaceWith(div.cloneNode(true));
         }
     }
 
