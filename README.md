@@ -9,7 +9,7 @@ This userscript replaces non-blurred spoiler image previews on New Reddit with g
 ## Installation
 
 1. Install a userscript manager extension for your browser (e.g., Tampermonkey).
-2. Click [here](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/main/New%20Reddit-%20Spoiler%20Preview%20Fix.user.js) to open the raw userscript file.
+2. Click [here](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.1/src/spoilerPreviewFix.user.js) to open the raw userscript file.
 3. The userscript manager extension should detect the script and prompt you to install it. Follow the instructions to install the script.
 
 ## Usage
@@ -22,4 +22,4 @@ Once the userscript is installed, it will automatically run on any Reddit page y
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.1/LICENSE).
