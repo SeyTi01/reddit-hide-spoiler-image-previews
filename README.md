@@ -22,4 +22,4 @@ Once the userscript is installed, it will automatically run on any Reddit page y
 
 ## License
 
-This project is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+This project is licensed under the [MIT License](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/main/LICENSE).
