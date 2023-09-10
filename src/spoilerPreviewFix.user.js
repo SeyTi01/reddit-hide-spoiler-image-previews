@@ -12,25 +12,28 @@
 (function() {
     'use strict';
 
-    const ICON_CLASS = '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery';
-    const IMAGE_SELECTOR = 'div[aria-label][data-click-id="image"]';
-    const BACKGROUND_DIV_SELECTOR = 'div[data-click-id="background"]';
-    const SPOILER_SELECTOR = 'span._1wzhGvvafQFOWAyA157okr';
-    const ICON_CONTAINER = createIconContainer();
-    const OBSERVER = new MutationObserver(observeMutations);
+    const config = {
+        iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
+        imageSelector: 'div[aria-label][data-click-id="image"]',
+        backgroundDivSelector: 'div[data-click-id="background"]',
+        spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr',
+    };
 
-    function createIconContainer() {
+    const iconContainer = createIconContainer(config.iconClass);
+    const observer = new MutationObserver(observeMutations);
+
+    function createIconContainer(iconClass) {
         const container = document.createElement('div');
         const icon = document.createElement('i');
-        icon.className = ICON_CLASS;
+        icon.className = iconClass;
         container.appendChild(icon);
         return container.cloneNode(true);
     }
 
     function hideSpoilerImage(image) {
-        const spoilerSpan = image.closest(BACKGROUND_DIV_SELECTOR).querySelector(SPOILER_SELECTOR);
+        const spoilerSpan = image.closest(config.backgroundDivSelector).querySelector(config.spoilerSelector);
         if (spoilerSpan) {
-            image.replaceWith(ICON_CONTAINER.cloneNode(true));
+            image.replaceWith(iconContainer.cloneNode(true));
         }
     }
 
@@ -39,14 +42,14 @@
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
                     if (node.nodeType === Node.ELEMENT_NODE) {
-                        const IMAGES = node.querySelectorAll(IMAGE_SELECTOR);
-                        IMAGES.forEach(hideSpoilerImage);
+                        const images = node.querySelectorAll(config.imageSelector);
+                        images.forEach(hideSpoilerImage);
                     }
                 });
             }
         }
     }
 
-    document.querySelectorAll(IMAGE_SELECTOR).forEach(hideSpoilerImage);
-    OBSERVER.observe(document.body, { childList: true, subtree: true });
+    document.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
