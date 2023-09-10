@@ -27,7 +27,7 @@
         const icon = document.createElement('i');
         icon.className = iconClass;
         container.appendChild(icon);
-        return container.cloneNode(true);
+        return container;
     }
 
     function hideSpoilerImage(image) {
