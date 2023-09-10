@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Reddit: Hide Spoiler Image Previews
 // @namespace    https://github.com/SeyTi01/
-// @version      1.3
+// @version      1.3.1
 // @description  Hides visible spoiler image previews on new Reddit.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
@@ -27,7 +27,7 @@
         const icon = document.createElement('i');
         icon.className = iconClass;
         container.appendChild(icon);
-        return container.cloneNode(true);
+        return container;
     }
 
     function hideSpoilerImage(image) {
