@@ -16,17 +16,21 @@
     const IMAGE_SELECTOR = 'div[aria-label][data-click-id="image"]';
     const BACKGROUND_DIV_SELECTOR = 'div[data-click-id="background"]';
     const SPOILER_SELECTOR = 'span._1wzhGvvafQFOWAyA157okr';
+    const ICON_CONTAINER = createIconContainer();
 
-    let iconContainer = document.createElement('div');
-    let icon = document.createElement('i');
-    icon.className = ICON_CLASS;
-    iconContainer.appendChild(icon);
+    function createIconContainer() {
+        const container = document.createElement('div');
+        const icon = document.createElement('i');
+        icon.className = ICON_CLASS;
+        container.appendChild(icon);
+        return container.cloneNode(true);
+    }
 
-    function replaceImages() {
+    function hideSpoilerImages() {
         document.querySelectorAll(IMAGE_SELECTOR).forEach(image => {
             let spoilerSpan = image.closest(BACKGROUND_DIV_SELECTOR).querySelector(SPOILER_SELECTOR);
             if (spoilerSpan) {
-                image.replaceWith(iconContainer.cloneNode(true));
+                image.replaceWith(ICON_CONTAINER.cloneNode(true));
             }
         });
     }
@@ -34,13 +38,13 @@
     function observeMutations(mutations) {
         for (let mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
-                replaceImages();
+                hideSpoilerImages();
                 break;
             }
         }
     }
 
-    replaceImages();
+    hideSpoilerImages();
     let observer = new MutationObserver(observeMutations);
     observer.observe(document.body, { childList: true });
 })();
