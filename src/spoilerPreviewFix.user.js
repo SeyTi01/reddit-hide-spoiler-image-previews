@@ -17,32 +17,30 @@
     const BACKGROUND_DIV_SELECTOR = 'div[data-click-id="background"]';
     const SPOILER_SELECTOR = 'span._1wzhGvvafQFOWAyA157okr';
 
-    let div = document.createElement('div');
+    let iconContainer = document.createElement('div');
     let icon = document.createElement('i');
     icon.className = ICON_CLASS;
-    div.appendChild(icon);
+    iconContainer.appendChild(icon);
 
     function replaceImages() {
-        let images = document.querySelectorAll(IMAGE_SELECTOR);
-
-        for (let image of images) {
+        document.querySelectorAll(IMAGE_SELECTOR).forEach(image => {
             let spoilerSpan = image.closest(BACKGROUND_DIV_SELECTOR).querySelector(SPOILER_SELECTOR);
-            if (!spoilerSpan) continue;
-
-            image.replaceWith(div.cloneNode(true));
-        }
+            if (spoilerSpan) {
+                image.replaceWith(iconContainer.cloneNode(true));
+            }
+        });
     }
 
-    replaceImages();
-
-    let observer = new MutationObserver(function(mutations) {
+    function observeMutations(mutations) {
         for (let mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
                 replaceImages();
                 break;
             }
         }
-    });
+    }
 
-    observer.observe(document.body, {childList: true});
+    replaceImages();
+    let observer = new MutationObserver(observeMutations);
+    observer.observe(document.body, { childList: true });
 })();
