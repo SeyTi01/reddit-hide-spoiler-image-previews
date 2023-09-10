@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         New Reddit: Spoiler Preview Fix
+// @name         Reddit: Hide Spoiler Image Previews
 // @namespace    https://github.com/SeyTi01/
-// @version      1.2
-// @description  Hides non-blurred spoiler image previews on New Reddit with gallery icons.
+// @version      1.3
+// @description  Hides visible spoiler image previews on new Reddit.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
 // @grant        none
