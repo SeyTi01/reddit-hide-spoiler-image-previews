@@ -42,8 +42,7 @@
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
                     if (node.nodeType === Node.ELEMENT_NODE) {
-                        const images = node.querySelectorAll(config.imageSelector);
-                        images.forEach(hideSpoilerImage);
+                        node.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
                     }
                 });
             }
