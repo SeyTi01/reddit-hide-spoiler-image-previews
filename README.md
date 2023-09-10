@@ -1,15 +1,15 @@
-# New Reddit: Spoiler Preview Fix
+# Reddit: Hide Spoiler Image Previews
 
-A userscript that hides non-blurred spoiler image previews on New Reddit with gallery icons.
+A userscript that hides visible spoiler image previews on new Reddit.
 
 ## Description
 
-This userscript replaces non-blurred spoiler image previews on New Reddit with gallery icons. It helps to prevent spoilers from being accidentally revealed when browsing Reddit.
+This userscript replaces visible spoiler image previews on new Reddit with gallery icons.
 
 ## Installation
 
 1. Install a userscript manager extension for your browser (e.g., Tampermonkey).
-2. Click [here](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.2/src/spoilerPreviewFix.user.js) to open the raw userscript file.
+2. Click [here](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.3/src/spoilerPreviewFix.user.js) to open the raw userscript file.
 3. The userscript manager extension should detect the script and prompt you to install it. Follow the instructions to install the script.
 
 ## Usage
@@ -22,4 +22,4 @@ Once the userscript is installed, it will automatically run on any Reddit page y
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.2/LICENSE).
+This project is licensed under the [MIT License](https://github.com/SeyTi01/new-reddit-spoiler-preview-fix/raw/1.3/LICENSE).

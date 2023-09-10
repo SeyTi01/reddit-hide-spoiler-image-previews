@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         New Reddit: Spoiler Preview Fix
+// @name         Reddit: Hide Spoiler Image Previews
 // @namespace    https://github.com/SeyTi01/
-// @version      1.2
-// @description  Hides non-blurred spoiler image previews on New Reddit with gallery icons.
+// @version      1.3
+// @description  Hides visible spoiler image previews on new Reddit.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
 // @grant        none
@@ -12,39 +12,43 @@
 (function() {
     'use strict';
 
-    const ICON_CLASS = '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery';
-    const IMAGE_SELECTOR = 'div[aria-label][data-click-id="image"]';
-    const SPOILER_SELECTOR = 'span._1wzhGvvafQFOWAyA157okr';
+    const config = {
+        iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
+        imageSelector: 'div[aria-label][data-click-id="image"]',
+        backgroundDivSelector: 'div[data-click-id="background"]',
+        spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr',
+    };
 
-    let div = document.createElement('div');
-    let icon = document.createElement('i');
-    icon.className = ICON_CLASS;
-    div.appendChild(icon);
+    const iconContainer = createIconContainer(config.iconClass);
+    const observer = new MutationObserver(observeMutations);
 
-    function replaceImages() {
-        let images = document.querySelectorAll(IMAGE_SELECTOR);
+    function createIconContainer(iconClass) {
+        const container = document.createElement('div');
+        const icon = document.createElement('i');
+        icon.className = iconClass;
+        container.appendChild(icon);
+        return container.cloneNode(true);
+    }
 
-        for (let image of images) {
-            let img = image.querySelector('img._25ZOvQhQdAqwdxPd5z-KFB');
-            if (!img) continue;
-
-            let spoilerSpan = image.closest('div[data-click-id="background"]').querySelector(SPOILER_SELECTOR);
-            if (!spoilerSpan) continue;
-
-            image.replaceWith(div.cloneNode(true));
+    function hideSpoilerImage(image) {
+        const spoilerSpan = image.closest(config.backgroundDivSelector).querySelector(config.spoilerSelector);
+        if (spoilerSpan) {
+            image.replaceWith(iconContainer.cloneNode(true));
         }
     }
 
-    replaceImages();
-
-    let observer = new MutationObserver(function(mutations) {
-        for (let mutation of mutations) {
+    function observeMutations(mutations) {
+        for (const mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
-                replaceImages();
-                break;
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        node.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
+                    }
+                });
             }
         }
-    });
+    }
 
-    observer.observe(document.body, {childList: true});
+    document.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
