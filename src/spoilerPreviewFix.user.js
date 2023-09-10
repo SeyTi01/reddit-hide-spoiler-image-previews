@@ -17,6 +17,7 @@
     const BACKGROUND_DIV_SELECTOR = 'div[data-click-id="background"]';
     const SPOILER_SELECTOR = 'span._1wzhGvvafQFOWAyA157okr';
     const ICON_CONTAINER = createIconContainer();
+    const OBSERVER = new MutationObserver(observeMutations);
 
     function createIconContainer() {
         const container = document.createElement('div');
@@ -26,25 +27,26 @@
         return container.cloneNode(true);
     }
 
-    function hideSpoilerImages() {
-        document.querySelectorAll(IMAGE_SELECTOR).forEach(image => {
-            let spoilerSpan = image.closest(BACKGROUND_DIV_SELECTOR).querySelector(SPOILER_SELECTOR);
-            if (spoilerSpan) {
-                image.replaceWith(ICON_CONTAINER.cloneNode(true));
-            }
-        });
+    function hideSpoilerImage(image) {
+        const spoilerSpan = image.closest(BACKGROUND_DIV_SELECTOR).querySelector(SPOILER_SELECTOR);
+        if (spoilerSpan) {
+            image.replaceWith(ICON_CONTAINER.cloneNode(true));
+        }
     }
 
     function observeMutations(mutations) {
-        for (let mutation of mutations) {
+        for (const mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
-                hideSpoilerImages();
-                break;
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        const IMAGES = node.querySelectorAll(IMAGE_SELECTOR);
+                        IMAGES.forEach(hideSpoilerImage);
+                    }
+                });
             }
         }
     }
 
-    hideSpoilerImages();
-    let observer = new MutationObserver(observeMutations);
-    observer.observe(document.body, { childList: true });
+    document.querySelectorAll(IMAGE_SELECTOR).forEach(hideSpoilerImage);
+    OBSERVER.observe(document.body, { childList: true, subtree: true });
 })();
