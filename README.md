@@ -14,7 +14,7 @@ This userscript replaces visible spoiler image previews on new Reddit with galle
 
 ## Usage
 
-Once the userscript is installed, it will automatically run on any Reddit page you visit. Non-blurred spoiler image previews will be replaced with gallery icons.
+Once the userscript is installed, it will automatically run on any Reddit page you visit. Visible spoiler image previews will be replaced with gallery icons.
 
 ## Author
 
