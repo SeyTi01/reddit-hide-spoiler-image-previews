@@ -16,7 +16,7 @@
         iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
         imageSelector: 'div[aria-label][data-click-id="image"]',
         backgroundDivSelector: 'div[data-click-id="background"]',
-        spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr',
+        spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
     };
 
     const iconContainer = createIconContainer(config.iconClass);
