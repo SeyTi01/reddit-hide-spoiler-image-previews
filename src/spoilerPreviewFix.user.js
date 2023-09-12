@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Reddit: Hide Spoiler Image Previews
 // @namespace    https://github.com/SeyTi01/
-// @version      1.4
+// @version      1.5
 // @description  Hides visible spoiler image previews on new Reddit.
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
