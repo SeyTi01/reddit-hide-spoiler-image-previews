@@ -14,7 +14,7 @@
 
     const SELECTORS = {
         iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
-        imageDiv: 'div._2e9Lv1I3dOmICVO9fg3uTG',
+        imageDiv: 'div._2c1ElNxHftd8W_nZtcG9zf',
         spoilerSpan: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
         backgroundClosest: '._1poyrkZ7g36PawDueRza-J'
     };
@@ -42,7 +42,8 @@
     }
 
     function hideSpoilerImage(image) {
-        const spoilerSpan = image.closest(SELECTORS.backgroundClosest).querySelector(SELECTORS.spoilerSpan);
+        const background = image.closest(SELECTORS.backgroundClosest);
+        const spoilerSpan = background.querySelector(SELECTORS.spoilerSpan);
         if (spoilerSpan) {
             image.replaceWith(iconContainer.cloneNode(true));
         }
