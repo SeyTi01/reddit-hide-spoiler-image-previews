@@ -29,11 +29,15 @@
         for (const mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
-                    if (node instanceof HTMLElement) {
-                        node.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
-                    }
+                    handleAddedNode(node);
                 });
             }
+        }
+    }
+
+    function handleAddedNode(node) {
+        if (node instanceof HTMLElement) {
+            node.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
         }
     }
 
