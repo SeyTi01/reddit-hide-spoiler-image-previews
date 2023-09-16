@@ -12,32 +12,35 @@
 (function() {
     'use strict';
 
-    const config = {
+    const SELECTORS = {
         iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
         imageSelector: 'div[aria-label][data-click-id="image"]',
         backgroundDivSelector: 'div[data-click-id="background"]',
         spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
     };
 
-    const iconContainer = createIconContainer(config.iconClass);
+    const iconContainer = createIconContainer(SELECTORS.iconClass);
     const observer = new MutationObserver(observeMutations);
 
-    function hideSpoilerImage(image) {
-        const spoilerSpan = image.closest(config.backgroundDivSelector).querySelector(config.spoilerSelector);
-        if (spoilerSpan) {
-            image.replaceWith(iconContainer.cloneNode(true));
-        }
-    }
+    document.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     function observeMutations(mutations) {
         for (const mutation of mutations) {
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        node.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
+                    if (node instanceof HTMLElement) {
+                        node.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
                     }
                 });
             }
+        }
+    }
+
+    function hideSpoilerImage(image) {
+        const spoilerSpan = image.closest(SELECTORS.backgroundDivSelector).querySelector(SELECTORS.spoilerSelector);
+        if (spoilerSpan) {
+            image.replaceWith(iconContainer.cloneNode(true));
         }
     }
 
@@ -48,7 +51,4 @@
         container.appendChild(icon);
         return container;
     }
-
-    document.querySelectorAll(config.imageSelector).forEach(hideSpoilerImage);
-    observer.observe(document.body, { childList: true, subtree: true });
 })();
