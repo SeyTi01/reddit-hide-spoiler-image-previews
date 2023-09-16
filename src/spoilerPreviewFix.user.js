@@ -13,15 +13,15 @@
     'use strict';
 
     const SELECTORS = {
-        imageDiv: 'div._2c1ElNxHftd8W_nZtcG9zf',
-        spoilerSpan: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
-        backgroundClosest: '._1poyrkZ7g36PawDueRza-J'
+        image: 'div._2c1ElNxHftd8W_nZtcG9zf',
+        spoiler: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
+        background: '._1poyrkZ7g36PawDueRza-J'
     };
 
     const spoilerClass = 'GnWcY6GPzeZ5rzsiQ98fo';
     const observer = new MutationObserver(observeMutations);
 
-    document.querySelectorAll(SELECTORS.imageDiv).forEach(applySpoilerStyles);
+    document.querySelectorAll(SELECTORS.image).forEach(applySpoilerStyles);
     observer.observe(document.body, { childList: true, subtree: true });
 
     function observeMutations(mutations) {
@@ -35,14 +35,13 @@
     }
 
     function handleAddedNode(node) {
-        if (node instanceof HTMLElement) {
-            node.querySelectorAll(SELECTORS.imageDiv).forEach(applySpoilerStyles);
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            node.querySelectorAll(SELECTORS.image).forEach(applySpoilerStyles);
         }
     }
 
     function applySpoilerStyles(image) {
-        const background = image.closest(SELECTORS.backgroundClosest);
-        const spoilerSpan = background.querySelector(SELECTORS.spoilerSpan);
+        const spoilerSpan = image.closest(SELECTORS.background).querySelector(SELECTORS.spoiler);
         if (spoilerSpan) {
             image.classList.add(spoilerClass);
         }
