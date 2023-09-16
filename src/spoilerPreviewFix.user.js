@@ -2,7 +2,7 @@
 // @name         Reddit: Hide Spoiler Image Previews
 // @namespace    https://github.com/SeyTi01/
 // @version      1.6
-// @description  Applies blur effect to visible spoiler image previews on new Reddit.
+// @description  Applies blur effect to visible spoiler image previews on new Reddit
 // @author       SeyTi01
 // @match        https://www.reddit.com/*
 // @grant        none
