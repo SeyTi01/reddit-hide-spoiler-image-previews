@@ -13,13 +13,12 @@
     'use strict';
 
     const SELECTORS = {
-        image: 'div._2c1ElNxHftd8W_nZtcG9zf',
+        image: 'div._2e9Lv1I3dOmICVO9fg3uTG',
         spoiler: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
         background: '._1poyrkZ7g36PawDueRza-J'
     };
 
     const iconClass = '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery';
-
     const iconContainer = createIconContainer(iconClass);
     const observer = new MutationObserver(observeMutations);
 
@@ -38,13 +37,12 @@
 
     function handleAddedNode(node) {
         if (node instanceof HTMLElement) {
-            hideSpoilerImage(node.querySelector(SELECTORS.image));
+            node.querySelectorAll(SELECTORS.image).forEach(hideSpoilerImage);
         }
     }
 
     function hideSpoilerImage(image) {
-        const background = image.closest(SELECTORS.background);
-        const spoilerSpan = background.querySelector(SELECTORS.spoiler);
+        const spoilerSpan = image.closest(SELECTORS.background).querySelector(SELECTORS.spoiler);
         if (spoilerSpan) {
             image.replaceWith(iconContainer.cloneNode(true));
         }
