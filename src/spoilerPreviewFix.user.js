@@ -14,7 +14,7 @@
 
     const SELECTORS = {
         iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
-        imageSelector: 'div[aria-label][data-click-id="image"]',
+        imageSelector: 'div._2e9Lv1I3dOmICVO9fg3uTG',
         backgroundDivSelector: 'div[data-click-id="background"]',
         spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
     };
@@ -37,7 +37,7 @@
 
     function handleAddedNode(node) {
         if (node instanceof HTMLElement) {
-            node.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
+            hideSpoilerImage(node.querySelector(SELECTORS.imageSelector));
         }
     }
 
