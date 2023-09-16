@@ -14,15 +14,15 @@
 
     const SELECTORS = {
         iconClass: '_3CquMWJ6RMh8E9D-_84AtZ _2hIvPRO2xz4rn9LXAJXYDa _10qSZsDWnOBwx4bc7GJ1QF icon icon-media_gallery',
-        imageSelector: 'div._2e9Lv1I3dOmICVO9fg3uTG',
-        backgroundDivSelector: 'div[data-click-id="background"]',
-        spoilerSelector: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
+        imageDiv: 'div._2c1ElNxHftd8W_nZtcG9zf',
+        spoilerSpan: 'span._1wzhGvvafQFOWAyA157okr, span._1P0ASR__enq34IxkSim2Rk',
+        backgroundClosest: '._1poyrkZ7g36PawDueRza-J'
     };
 
     const iconContainer = createIconContainer(SELECTORS.iconClass);
     const observer = new MutationObserver(observeMutations);
 
-    document.querySelectorAll(SELECTORS.imageSelector).forEach(hideSpoilerImage);
+    document.querySelectorAll(SELECTORS.imageDiv).forEach(hideSpoilerImage);
     observer.observe(document.body, { childList: true, subtree: true });
 
     function observeMutations(mutations) {
@@ -37,12 +37,13 @@
 
     function handleAddedNode(node) {
         if (node instanceof HTMLElement) {
-            hideSpoilerImage(node.querySelector(SELECTORS.imageSelector));
+            hideSpoilerImage(node.querySelector(SELECTORS.imageDiv));
         }
     }
 
     function hideSpoilerImage(image) {
-        const spoilerSpan = image.closest(SELECTORS.backgroundDivSelector).querySelector(SELECTORS.spoilerSelector);
+        const background = image.closest(SELECTORS.backgroundClosest);
+        const spoilerSpan = background.querySelector(SELECTORS.spoilerSpan);
         if (spoilerSpan) {
             image.replaceWith(iconContainer.cloneNode(true));
         }
